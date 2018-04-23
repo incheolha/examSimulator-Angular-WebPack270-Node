@@ -5,7 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// connecting mongoose 
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://192.168.0.3:27017");
+
 var appRoutes = require('./routes/app');
+var usrRoutes = require('./routes/users/user');
 
 var app = express();
 
@@ -28,6 +33,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

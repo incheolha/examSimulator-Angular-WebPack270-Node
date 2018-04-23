@@ -1,10 +1,6 @@
-#!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
 
-var app = require('../app');
+var app = require('../examServer');
 var debug = require('debug')('angular2-nodejs:server');
 var http = require('http');
 
