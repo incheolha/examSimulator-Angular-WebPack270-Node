@@ -7,16 +7,20 @@ var bodyParser = require('body-parser');
 
 // connecting mongoose 
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://192.168.0.3:27017");
+mongoose.connect("mongodb://127.0.0.1:27017/examSimulator");
 
 var appRoutes = require('./routes/app');
-var usrRoutes = require('./routes/users/user');
+var userRoutes = require('./routes/users/user');
+var registerRoutes = require('./routes/toefl/registerExam/registerExam');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+//toefl uploads image and audio file
+app.use('/routes/toefl/registerExam/uploads', express.static('routes/toefl/registerExam/uploads'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,6 +37,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/registerExam', registerRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
